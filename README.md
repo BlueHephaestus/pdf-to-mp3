@@ -6,4 +6,6 @@ I made it so I could read research papers without having to physically read thro
 
 Example included is on "Attention is all you need" by Vaswani et al. (2017), which is a paper on the Transformer architecture. I've included the audio transcription of the paper in the repo, and you can listen to it here.
 
-I'm going to move this code and other tools I create into a more generic utils repository, you can find it here https://github.com/BlueHephaestus/utils
+### DEPRECATED
+
+This code has been improved and moved into a more generic utils repository, you can find it here https://github.com/BlueHephaestus/utils
