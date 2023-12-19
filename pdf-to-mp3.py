@@ -3,6 +3,21 @@ from pathlib import Path
 from openai import OpenAI
 
 fname = sys.argv[1]  # get document filename
+if len(sys.argv) > 2:
+    outname = sys.argv[2]  # get output filename
+else:
+    outname = fname
+
+# if len(sys.argv) > 3:
+#     model = sys.argv[3]  # get model name
+# else:
+#     model = "tts-1" #default
+
+if len(sys.argv) > 3:
+    model = "tts-1-hd"  # get model name
+else:
+    model = "tts-1" #default
+
 with fitz.open(fname) as doc:  # open document
     pages = [[word[4] for word in page.get_text("words")] for page in doc]
 
@@ -43,11 +58,11 @@ def chunk_iter(text):
             yield remove_citations(chunk) # doesn't work over word boundaries but this is a QOL thing
             chunk = word + " "
 
-speech_file_path = Path(__file__).parent / f"{fname}.mp3"
+speech_file_path = Path(__file__).parent / f"{outname}.mp3"
 open(speech_file_path, "w").close() # clear the file
 for chunk in tqdm(chunk_iter(text), total=len(' '.join(text))//INPUT_SIZE):
     response = client.audio.speech.create(
-      model="tts-1",
+      model="tts-1-hd",
       voice="fable",
       input=chunk,
     )
